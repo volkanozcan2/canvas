@@ -3,7 +3,7 @@ var router = express.Router();
 var { randomBytes } = require("crypto");
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'DeMo' });
+    res.render('index', { title: 'DeMo', ver: ~~(Math.random() * 10) });
 });
 router.post('/', function(req, res, next) {
     let buf = req.body.test;
