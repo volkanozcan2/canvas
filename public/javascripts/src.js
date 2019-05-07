@@ -9,7 +9,7 @@ let opts = {
 };
 const app = new PIXI.Application(innerWidth, innerHeight, opts);
 document.body.appendChild(app.view);
-console.log("pixi is working")
+console.log("pixi is working  and this is on foobar branch")
 // create a new Sprite from an image path.
 for (let i = 0; i < 500; i++) {
 
@@ -36,5 +36,6 @@ window.addEventListener('resize', resize);
 
 function resize() {
     app.renderer.resize(window.innerWidth, window.innerHeight);
+
 
 }
