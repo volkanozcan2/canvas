@@ -37,5 +37,5 @@ window.addEventListener('resize', resize);
 
 function resize() {
     app.renderer.resize(window.innerWidth, window.innerHeight);
-    rect.position.set(app.screen.width, app.screen.height);
+
 }
