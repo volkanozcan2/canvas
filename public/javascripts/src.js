@@ -20,6 +20,7 @@ for (let i = 0; i < 500; i++) {
     bunny.scale.set(0.5 + Math.random());
     bunny.length = Math.random() * 3;
     bunny.anchor.set(0.5);
+    bunny.tint = (Math.random() * 0xffffff);
     app.stage.addChild(bunny);
 }
 
