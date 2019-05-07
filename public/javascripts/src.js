@@ -7,10 +7,12 @@ let opts = {
     forceCanvas: false,
     clearBeforeRender: true
 };
+const tag = document.querySelector("meta[name='version']").getAttribute("content");
 const app = new PIXI.Application(innerWidth, innerHeight, opts);
 document.body.appendChild(app.view);
-console.log("pixi is working  and this is on foobar branch")
+console.log("pixi is working  and this is on  " + tag);
 // create a new Sprite from an image path.
+
 
 for(let i=0;i<1500;i++){
     const bunny = PIXI.Sprite.from('images/bunny.png');
@@ -18,7 +20,7 @@ for(let i=0;i<1500;i++){
     bunny.x = app.screen.width * .5;
     bunny.angle = Math.random() * Math.PI * 2;
     bunny.scale.set(0.5 + Math.random());
-    bunny.length = Math.random() * 3;
+    bunny.length = Math.random() * 5;
     bunny.anchor.set(0.5);
     bunny.tint = (Math.random() * 0xffffff);
     app.stage.addChild(bunny);
