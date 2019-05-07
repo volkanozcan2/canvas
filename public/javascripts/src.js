@@ -9,6 +9,7 @@ let opts = {
 };
 const app = new PIXI.Application(innerWidth, innerHeight, opts);
 document.body.appendChild(app.view);
+console.log("pixi is working")
 // create a new Sprite from an image path.
 for (let i = 0; i < 12000; i++) {
 
