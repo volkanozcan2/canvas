@@ -14,7 +14,8 @@ console.log("pixi is working  and this is on  " + tag);
 // create a new Sprite from an image path.
 
 
-for(let i=0;i<1500;i++){
+for (let i = 0; i < 1500; i++) {
+
     const bunny = PIXI.Sprite.from('images/bunny.png');
     bunny.y = app.screen.height * .5;
     bunny.x = app.screen.width * .5;
@@ -24,6 +25,7 @@ for(let i=0;i<1500;i++){
     bunny.anchor.set(0.5);
     bunny.tint = (Math.random() * 0xffffff);
     app.stage.addChild(bunny);
+
 }
 
 app.ticker.add(() => {
