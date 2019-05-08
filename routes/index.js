@@ -1,13 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var { randomBytes } = require("crypto");
+const express = require('express');
+const router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'DeMo', ver: ~~(Math.random() * 10) });
+    res.render('index', { title: 'DeMo', ver: req.headers["user-agent"] });
 });
-router.post('/', function(req, res, next) {
-    let buf = req.body.test;
-    let buff = new Buffer(buf);
-    res.json({ status: `${buff.toString('base64')}||deneme` });
-});
+
 module.exports = router;
