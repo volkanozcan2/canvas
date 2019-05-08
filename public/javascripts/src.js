@@ -1,3 +1,27 @@
+class particle extends PIXI.Sprite {
+    constructor(asset, x = Math.random() * app.renderer.width, y = Math.random() * app.renderer.height) {
+        super(PIXI.Texture.fromImage(asset));
+        this.x = x;
+        this.y = y;
+        this.anchor.set(.5);
+        this.scale.set(.1 + Math.random() * .9);
+        this.angle = Math.random() * 2 * Math.PI;
+        this.tint = Math.random() * 0xffffff;
+        this.length = Math.random() * 5;
+    }
+    move() {
+        this.x += Math.cos(this.angle) * this.length;
+        this.y += Math.sin(this.angle) * this.length;
+    }
+    edge() {
+        (this.x > app.renderer.width) && (this.x = 0);
+        (this.y > app.renderer.height) && (this.y = 0);
+        (this.x < 0) && (this.x = app.renderer.width);
+        (this.y < 0) && (this.y = app.renderer.height);
+
+    }
+}
+
 let opts = {
     transparent: false,
     backgroundColor: 0x49DCB1,
@@ -10,37 +34,25 @@ let opts = {
 const tag = document.querySelector("meta[name='version']").getAttribute("content");
 const app = new PIXI.Application(innerWidth, innerHeight, opts);
 document.body.appendChild(app.view);
+let container = new PIXI.Container();
+app.stage.addChild(container);
 console.log("pixi is working  and this is on  " + tag);
-// create a new Sprite from an image path.
 
 
-for (let i = 0; i < 1500; i++) {
-
-    const bunny = PIXI.Sprite.from('images/bunny.png');
-    bunny.y = app.screen.height * .5;
-    bunny.x = app.screen.width * .5;
-    bunny.angle = Math.random() * Math.PI * 2;
-    bunny.scale.set(0.5 + Math.random());
-    bunny.length = Math.random() * 5;
-    bunny.anchor.set(0.5);
-    bunny.tint = (Math.random() * 0xffffff);
-    app.stage.addChild(bunny);
-
+for (let i = 0; i < 5000; i++) {
+    let bunny = new particle("/images/ball.png");
+    container.addChild(bunny);
 }
 
 app.ticker.add(() => {
-    // just for fun, let's rotate mr rabbit a little
-    for (var i = 0; i < app.stage.children.length; i++) {
-        let bu = app.stage.children[i]
-        bu.x += Math.cos(bu.angle) * bu.length;
-        bu.y += Math.sin(bu.angle) * bu.length;
-
+    for (var i = 0; i < container.children.length; i++) {
+        let bu = container.children[i];
+        bu.move();
+        bu.edge();
     }
 });
 window.addEventListener('resize', resize);
 
 function resize() {
     app.renderer.resize(window.innerWidth, window.innerHeight);
-
-
 }
