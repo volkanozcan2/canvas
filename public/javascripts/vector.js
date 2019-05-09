@@ -1,39 +1,52 @@
-Object.assign(PIXI.ObservablePoint.prototype, {
+class particle extends PIXI.Sprite {
+    constructor(asset, x = Math.random() * app.renderer.width, y = Math.random() * app.renderer.height) {
+        super(PIXI.Texture.fromImage(asset));
+        this.x = x;
+        this.y = y;
+        this.anchor.set(.5);
+        this.scale.set(.1 + Math.random() * .9);
+        this.angle = Math.random() * 2 * Math.PI;
+        this.tint = Math.random() * 0xffffff;
+        this.length = Math.random() * 2;
+    }
+    move(t) {
+        this.x += Math.cos(this.angle) * this.length;
+        this.y += Math.sin(this.angle) * this.length;
+        /*this.position.lerp(t, 0.5);*/
 
-    add: function(o) {
-        this.set(this.x += o.x, this.y += o.y);
-    },
-    radd: function(o) {
-        return new PIXI.ObservablePoint(test, window, this.x + o.x, this.y + o.y);
-    },
-    sub: function(o) {
-        this.set(this.x -= o.x, this.y -= o.y);
+    }
+    edge() {
+        (this.x > app.renderer.width) && (this.x = 0);
+        (this.y > app.renderer.height) && (this.y = 0);
+        (this.x < 0) && (this.x = app.renderer.width);
+        (this.y < 0) && (this.y = app.renderer.height);
 
-    },
-    rsub: function(o) {
-        return new PIXI.ObservablePoint(test, window, this.x - o.x, this.y - o.y);
-    },
-    mult: function(o) {
-        this.x *= o;
-        this.y *= o;
-    },
-    rmult: function(o) {
-        return new PIXI.ObservablePoint(test, window, this.x * o, this.y * o);
-    },
-    getAngle() {
-        //in radians
-        return Math.atan2(this.y, this.x);
-    },
-    getLenght() {
-        return Math.hypot(this.x, this.y);
-    },
-    setLength(l) {
-        let angle = this.getAngle();
-        this.set(Math.cos(angle) * l, Math.sin(angle) * l);
-    },
-    setAngle(a) {
-        //in radians;
-        this.set(Math.cos(a) * this.getLenght(), Math.sin(a) * this.getLenght());
     }
 
+
+}
+let opts = {
+    transparent: false,
+    backgroundColor: 0x49DCB1,
+    resolution: 1,
+    antialias: 0,
+    autoResize: true,
+    forceCanvas: false,
+    clearBeforeRender: true,
+    forceFXAA: true
+};
+const style = new PIXI.TextStyle({
+    fontFamily: 'Arial',
+    fontSize: 36,
+    fontWeight: 'bold',
+    fill: ['#ffffff', '#00ff99'], // gradient
+    stroke: '#4a1850',
+    strokeThickness: 5,
+    dropShadow: true,
+    dropShadowColor: '#000000',
+    dropShadowBlur: 4,
+    dropShadowAngle: Math.PI / 6,
+    dropShadowDistance: 6,
+    wordWrap: true,
+    wordWrapWidth: 440,
 });
