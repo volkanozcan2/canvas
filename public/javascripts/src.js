@@ -10,17 +10,17 @@ app.stage.addChild(container);
 app.stage.addChild(richText);
 console.log("pixi is working  and this is on  " + tag);
 
-for (let i = 0; i < 2000; i++) {
+for (let i = 0; i < 5000; i++) {
     let bunny = new particle("/images/ball.png");
     container.addChild(bunny);
 }
-app.ticker.add((ticker) => {
+app.ticker.add(() => {
     for (var i = 0; i < container.children.length; i++) {
         let bu = container.children[i];
         bu.move();
         bu.edge();
     }
-    richText.setText(ticker.deltaTime);
+    richText.setText(~~app.ticker.FPS);
 });
 window.addEventListener('resize', resize);
 

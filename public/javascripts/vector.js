@@ -7,7 +7,7 @@ class particle extends PIXI.Sprite {
         this.scale.set(.1 + Math.random() * .9);
         this.angle = Math.random() * 2 * Math.PI;
         this.tint = Math.random() * 0xffffff;
-        this.length = Math.random() * 2;
+        this.length = Math.random() * 5;
     }
     move(t) {
         this.x += Math.cos(this.angle) * this.length;
