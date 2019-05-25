@@ -10,7 +10,7 @@ app.stage.addChild(container);
 app.stage.addChild(richText);
 console.log("pixi is working  and this is on  " + tag);
 
-for (let i = 0; i < 10000; i++) {
+for (let i = 0; i < 2000; i++) {
     let bunny = new particle("/images/ball.png");
     container.addChild(bunny);
 }
