@@ -1,52 +1,20 @@
-class particle extends PIXI.Sprite {
-    constructor(asset, x = Math.random() * app.renderer.width, y = Math.random() * app.renderer.height) {
-        super(PIXI.Texture.fromImage(asset));
-        this.x = x;
-        this.y = y;
-        this.anchor.set(.5);
-        this.scale.set(.1 + Math.random() * .9);
-        this.angle = Math.random() * 2 * Math.PI;
-        this.tint = Math.random() * 0xffffff;
-        this.length = Math.random() * 5;
-    }
-    move(t) {
-        this.x += Math.cos(this.angle) * this.length;
-        this.y += Math.sin(this.angle) * this.length;
-        /*this.position.lerp(t, 0.5);*/
-
-    }
-    edge() {
-        (this.x > app.renderer.width) && (this.x = 0);
-        (this.y > app.renderer.height) && (this.y = 0);
-        (this.x < 0) && (this.x = app.renderer.width);
-        (this.y < 0) && (this.y = app.renderer.height);
-
-    }
-
-
-}
 let opts = {
-    transparent: false,
-    backgroundColor: 0x49DCB1,
+    transparent: true,
+    backgroundColor: 0x000000,
     resolution: 1,
     antialias: 0,
     autoResize: true,
     forceCanvas: false,
     clearBeforeRender: true,
-    forceFXAA: true
+    forceFXAA: false
 };
-const style = new PIXI.TextStyle({
-    fontFamily: 'Arial',
-    fontSize: 36,
-    fontWeight: 'bold',
-    fill: ['#ffffff', '#00ff99'], // gradient
-    stroke: '#4a1850',
-    strokeThickness: 5,
-    dropShadow: true,
-    dropShadowColor: '#000000',
-    dropShadowBlur: 4,
-    dropShadowAngle: Math.PI / 6,
-    dropShadowDistance: 6,
-    wordWrap: true,
-    wordWrapWidth: 440,
-});
+
+const tag = document.querySelector("meta[name='version']").getAttribute("content");
+const app = new PIXI.Application(innerWidth, innerHeight, opts);
+document.body.appendChild(app.view);
+let container_2 = new PIXI.ParticleContainer();
+container_2.autoResize = true;
+app.stage.addChild(container_2);
+
+console.log("pixi is working  and this is on  " + tag);
+window.addEventListener('resize', () => app.renderer.resize(window.innerWidth, window.innerHeight));
